@@ -1,4 +1,4 @@
-package pl.polsl.szymon.gretka.repository;
+package pl.polsl.szymon.gretka.service;
 
 
 import java.util.ArrayList;
@@ -80,7 +80,6 @@ public class CarService extends EntityManagerFactoryInit {
             em.remove(car);
         else
             throw new EntityNotFoundException();
-            //System.out.println("Car with given id not found!");
     }
     
     

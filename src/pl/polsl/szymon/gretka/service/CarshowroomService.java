@@ -1,4 +1,4 @@
-package pl.polsl.szymon.gretka.repository;
+package pl.polsl.szymon.gretka.service;
 
 import java.util.ArrayList;
 import java.util.List;

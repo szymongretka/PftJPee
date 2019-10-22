@@ -5,7 +5,7 @@
  */
 package pl.polsl.szymon.gretka.controller;
 
-import pl.polsl.szymon.gretka.repository.CarshowroomService;
+import pl.polsl.szymon.gretka.service.CarshowroomService;
 import pl.polsl.szymon.gretka.view.View;
 
 /**

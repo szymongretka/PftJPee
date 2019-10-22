@@ -3,7 +3,7 @@ package pl.polsl.szymon.gretka.controller;
 import java.util.List;
 import pl.polsl.szymon.gretka.entity.Car;
 import pl.polsl.szymon.gretka.exception.EntityNotFoundException;
-import pl.polsl.szymon.gretka.repository.CarService;
+import pl.polsl.szymon.gretka.service.CarService;
 import pl.polsl.szymon.gretka.view.View;
 
 /**
@@ -47,23 +47,20 @@ public class CarController {
             view.print("Empty list");
     }
     
-    public void createCar(String brand, String model, String colour, 
-            Integer year) {
-        
-        Car car = new Car(brand, model, colour, year);
+    public void createCar(Car car) {
         carService.createCar(car);
     }
     
     public void deleteCar(final Long id) {
-        try{
+        try {
             carService.deleteCar(id);
         } catch(EntityNotFoundException e) {
             view.print(e.getMessage());
         }
     }
     
-    public void updateCar(final Long id) {
-        
+    public void updateCar(final Long id, Car updatedCar) {
+        carService.updateCar(updatedCar, id);
     }
 
     

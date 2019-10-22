@@ -12,7 +12,7 @@ public class View {
     /**
      * Scanner used for reading from standard input stream
      */
-    private final Scanner scanner = new Scanner(System.in);
+    //private final Scanner scanner = new Scanner(System.in);
 
     /**
      * Read input number
@@ -20,16 +20,19 @@ public class View {
      * @throws InputMismatchException thrown if the given coefficient is not an integer
      */
     public String readString() throws InputMismatchException {
+        Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
     
     public Long readLong() throws InputMismatchException {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Please type ID");
         Long input = scanner.nextLong();
         return input;
     }
     
     public int readInt() throws InputMismatchException {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Please type number");
         int input = scanner.nextInt();
         return input;
