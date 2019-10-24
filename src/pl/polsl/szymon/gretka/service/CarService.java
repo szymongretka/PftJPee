@@ -12,7 +12,6 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import pl.polsl.szymon.gretka.exception.EntityNotFoundException;
-import pl.polsl.szymon.gretka.exception.SimpleException;
 
 /**
  *
@@ -76,8 +75,10 @@ public class CarService extends EntityManagerFactoryInit {
     
     public void deleteCar(final Long id) throws EntityNotFoundException {
         Car car = em.find(Car.class, id);
-        if(car != null)
+        if(car != null) {
             em.remove(car);
+            em.clear();
+        }
         else
             throw new EntityNotFoundException();
     }

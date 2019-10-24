@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.polsl.szymon.gretka.entity;
 
 import java.io.Serializable;
@@ -12,7 +7,6 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +17,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Szymek
+ * @author Szymon Gretka
  */
 @Entity
 @Table(name = "carshowroom")
@@ -50,16 +44,25 @@ public class CarShowroom implements Serializable {
     @Column(name = "street_number", nullable = false, length = 50)
     private String street;
     
-    @OneToMany(mappedBy = "carShowroom", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "carShowroom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Car> cars = new ArrayList<>();
     
     public CarShowroom() {}
-
+    
     public CarShowroom(String name, String city, String street) {
         this.name = name;
         this.city = city;
         this.street = street;
     }
+
+    public CarShowroom(String name, String city, String street, List<Car> cars) {
+        this.name = name;
+        this.city = city;
+        this.street = street;
+        this.cars = cars;
+    }
+    
+    
 
     public Long getId() {
         return id;

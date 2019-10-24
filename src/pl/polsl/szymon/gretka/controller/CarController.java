@@ -8,7 +8,7 @@ import pl.polsl.szymon.gretka.view.View;
 
 /**
  *
- * @author Szymek
+ * @author Szymon Gretka
  */
 public class CarController {
     

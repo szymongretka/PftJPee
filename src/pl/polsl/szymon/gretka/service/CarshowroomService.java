@@ -10,9 +10,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import pl.polsl.szymon.gretka.entity.CarShowroom;
+import pl.polsl.szymon.gretka.exception.EntityNotFoundException;
 /**
  *
- * @author Szymek
+ * @author Szymon Gretka
  */
 public class CarshowroomService extends EntityManagerFactoryInit {
     
@@ -26,8 +27,12 @@ public class CarshowroomService extends EntityManagerFactoryInit {
         return em.createNamedQuery(CarShowroom.FIND_ALL).getResultList();
     }
     
-    public CarShowroom findById(Long id) {
-        return em.find(CarShowroom.class, id);
+    public CarShowroom findById(Long id) throws EntityNotFoundException {
+        CarShowroom carShowroom = em.find(CarShowroom.class, id);
+        if(carShowroom != null)
+            return carShowroom;
+        else
+            throw new EntityNotFoundException();
     }
     
     public List<CarShowroom> getCarshowroomsByParameters(String name, 
@@ -66,12 +71,12 @@ public class CarshowroomService extends EntityManagerFactoryInit {
         }
     }
     
-    public void deleteCarShowroom(final Long id) {
+    public void deleteCarShowroom(final Long id) throws EntityNotFoundException {
         CarShowroom carShowroom = em.find(CarShowroom.class, id);
         if(carShowroom != null)
             em.remove(carShowroom);
         else
-            System.out.println("Carshowroom with given id not found!");
+            throw new EntityNotFoundException();
     }
     
     
