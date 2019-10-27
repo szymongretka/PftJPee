@@ -14,21 +14,39 @@ import javax.persistence.criteria.Root;
 import pl.polsl.szymon.gretka.exception.EntityNotFoundException;
 
 /**
- *
- * @author Szymek
+ * Bussines logic for the car
+ * 
+ * @author Szymon Gretka
  */
 public class CarService extends EntityManagerFactoryInit {
     
+    /**
+     * Initialization of the entityManager
+     */
     EntityManager em;
 
+    /**
+     * No args constructor
+     */
     public CarService() {
         this.em = emf.createEntityManager();
     }
     
+    /**
+     * Returns list of all carshowrooms
+     * @return list
+     */
     public List<Car> getAllCars() {
         return em.createNamedQuery(Car.FIND_ALL).getResultList();
     }
     
+    /**
+     * Finds car by its id
+     * 
+     * @param id
+     * @return car
+     * @throws EntityNotFoundException thrown if none object matches given id
+     */
     public Car findById(Long id) throws EntityNotFoundException {
         Car car = em.find(Car.class, id);
         if(car != null)
@@ -37,11 +55,25 @@ public class CarService extends EntityManagerFactoryInit {
             throw new EntityNotFoundException();
     }
     
+    /**
+     * Returns list of cars which fulfill given parameters
+     * 
+     * @param brand
+     * @param model
+     * @param colour
+     * @param year
+     * @return
+     */
     public List<Car> getCarByParameters(String brand, String model, 
             String colour, Integer year) {
         return em.createQuery(createQuery(brand, model, colour, year)).getResultList();
     }
     
+    /**
+     * Creates a new car
+     * 
+     * @param car
+     */
     public void createCar(final Car car) {
         try {
             em.getTransaction().begin();
@@ -54,6 +86,12 @@ public class CarService extends EntityManagerFactoryInit {
         }
     }
     
+    /**
+     * Updates the car with given id
+     * 
+     * @param givenCar
+     * @param id
+     */
     public void updateCar(final Car givenCar, final Long id) {
         final Car car = em.find(Car.class, id);
         if(car != null) {
@@ -73,11 +111,18 @@ public class CarService extends EntityManagerFactoryInit {
         }
     }
     
+    /**
+     * Deletes the car with given id
+     * 
+     * @param id
+     * @throws EntityNotFoundException thrown if none object matches given id
+     */
     public void deleteCar(final Long id) throws EntityNotFoundException {
         Car car = em.find(Car.class, id);
         if(car != null) {
+            em.getTransaction().begin();       
             em.remove(car);
-            em.clear();
+            em.getTransaction().commit();
         }
         else
             throw new EntityNotFoundException();
@@ -118,6 +163,14 @@ public class CarService extends EntityManagerFactoryInit {
                         new Predicate[predicates.size()])));
         }
         return queryDefinition;
+    }
+    
+    /**
+     * Closes the entityManager
+     */
+    public void closeEntityManager() {
+        em.clear();
+        em.close();
     }
     
 }

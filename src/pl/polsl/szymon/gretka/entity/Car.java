@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,10 +15,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- *
- * @author Szymek
+ * Car is an entity class which is being used for CRUD operations
+ * 
+ * @author Szymon Gretka
  */
-
 @Entity
 @Table(name = "car")
 @NamedQueries({
@@ -26,6 +27,9 @@ import javax.persistence.Table;
 })
 public class Car implements Serializable {
     
+    /**
+     * Simple query for finding all cars
+     */
     public static final String FIND_ALL = "Car.findAll";
 
     @Id
@@ -45,12 +49,22 @@ public class Car implements Serializable {
     @Column(name = "year_of_manufacture", nullable = false)
     private Integer year;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carshowroom_id")
     private CarShowroom carShowroom;
 
+    /**
+     * No args contructor
+     */
     public Car(){}
 
+    /**
+     * Constructor for creating a new car.
+     * @param brand is the brand of the car
+     * @param model is the brand of the car
+     * @param colour is the brand of the car
+     * @param year is the brand of the car
+     */
     public Car(String brand, String model, String colour, Integer year) {
         this.brand = brand;
         this.model = model;
@@ -58,6 +72,15 @@ public class Car implements Serializable {
         this.year = year;
     }
 
+    /**
+     * Constructor for creating a new car.
+     * @param id
+     * @param brand
+     * @param model
+     * @param colour
+     * @param year
+     * @param carShowroom
+     */
     public Car(Long id, String brand, String model, String colour, Integer year, 
             CarShowroom carShowroom) {
         this.id = id;
@@ -67,9 +90,6 @@ public class Car implements Serializable {
         this.year = year;
         this.carShowroom = carShowroom;
     }
-    
-    
-    
     
 
     public Long getId() {
@@ -111,6 +131,15 @@ public class Car implements Serializable {
     public void setYear(Integer year) {
         this.year = year;
     }
+
+    public CarShowroom getCarShowroom() {
+        return carShowroom;
+    }
+
+    public void setCarShowroom(CarShowroom carShowroom) {
+        this.carShowroom = carShowroom;
+    }
+    
 
     @Override
     public int hashCode() {

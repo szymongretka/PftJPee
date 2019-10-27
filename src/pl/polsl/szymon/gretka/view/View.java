@@ -2,36 +2,55 @@ package pl.polsl.szymon.gretka.view;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import pl.polsl.szymon.gretka.exception.SimpleException;
 
 /**
- *
- * @author Szymek
+ * @author Szymon Gretka
  */
 public class View {
-    /**
-     * Scanner used for reading from standard input stream
-     */
-    //private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Read input number
-     * @return coefficient value
-     * @throws InputMismatchException thrown if the given coefficient is not an integer
+     * Read input string
+     *
+     * @return string value
+     * @throws InputMismatchException thrown if the given coefficient is not an
+     * string
      */
     public String readString() throws InputMismatchException {
+        /**
+         * Scanner used for reading from standard input stream
+         */
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-    
+
+    /**
+     * Read input long
+     *
+     * @return long value
+     * @throws InputMismatchException thrown if the given coefficient is not an
+     * long
+     */
     public Long readLong() throws InputMismatchException {
+        /**
+         * Scanner used for reading from standard input stream
+         */
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please type ID");
         Long input = scanner.nextLong();
         return input;
     }
-    
+
+    /**
+     * Read input integer
+     *
+     * @return integer value
+     * @throws InputMismatchException thrown if the given coefficient is not an
+     * integer
+     */
     public int readInt() throws InputMismatchException {
+        /**
+         * Scanner used for reading from standard input stream
+         */
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please type number");
         int input = scanner.nextInt();

@@ -27,6 +27,9 @@ import javax.persistence.Table;
 })
 public class CarShowroom implements Serializable {
     
+    /**
+     * Simple query for finding all carshowrooms
+     */
     public static final String FIND_ALL = "CarShowroom.findAll";
     
     
@@ -47,22 +50,45 @@ public class CarShowroom implements Serializable {
     @OneToMany(mappedBy = "carShowroom", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Car> cars = new ArrayList<>();
     
+    /**
+     * metohd used for adding a car to carshowroom
+     * @param car
+     */
+    public void addCar(Car car) {
+        cars.add(car);
+        car.setCarShowroom(this);
+    }
+    
+    /**
+     * No args contructor
+     */
     public CarShowroom() {}
     
+    /**
+     * Constructor for creating a new carshowroom.
+     * @param name
+     * @param city
+     * @param street
+     */
     public CarShowroom(String name, String city, String street) {
         this.name = name;
         this.city = city;
         this.street = street;
     }
 
+    /**
+     * Constructor for creating a new carshowroom.
+     * @param name
+     * @param city
+     * @param street
+     * @param cars
+     */
     public CarShowroom(String name, String city, String street, List<Car> cars) {
         this.name = name;
         this.city = city;
         this.street = street;
         this.cars = cars;
-    }
-    
-    
+    }   
 
     public Long getId() {
         return id;

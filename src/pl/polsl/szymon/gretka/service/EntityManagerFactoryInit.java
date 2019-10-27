@@ -5,10 +5,20 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author Szymek
+ * @author Szymon Gretka
  */
 public class EntityManagerFactoryInit {
     
+    /**
+     * Initialization of the entityManagerFactory
+     */
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("JpaPU");
 
+    /**
+     * Closes the entity manager factory
+     */
+    public void closeManagerFactory() {
+        emf.close();
+    }
+    
 }
